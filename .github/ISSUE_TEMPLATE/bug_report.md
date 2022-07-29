@@ -1,6 +1,7 @@
 ---
 name: Bug report
 about: Create a report to alert us of bugs in Dependabot Batcher
+labels: bug
 
 ---
 
