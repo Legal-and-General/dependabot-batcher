@@ -12,4 +12,4 @@ Screenshot: (if appropriate provide a quick screen grab of the changes)
 
 # Checklist:
 
-- [ ] I have provided documentation in the notes section of the story
+- [ ] I have updated, or provided new, documentation
