@@ -1,0 +1,28 @@
+{
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true
+  },
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "lib": [ "es2017", "esnext" ],
+    "module": "node16",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2017",
+    "typeRoots": [ "node_modules/@types" ]
+  },
+  "include": [ "./src/**/*.ts" ],
+  "exclude": [ "node_modules" ]
+}
