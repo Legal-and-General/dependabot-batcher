@@ -1,0 +1,5 @@
+# Don't lint these directories
+
+dist
+coverage
+node_modules
