@@ -1,0 +1,24 @@
+name: Dependabot Batcher
+description: An action to ease your dependency maintenance and save GitHub minutes.
+
+inputs:
+  token:
+    description: A token with 'repo' and 'workflow' privileges
+    required: true
+  baseBranchName:
+    description: The name of your default branch, usually 'main' or 'master'
+    required: false
+  batchBranchName:
+    description: The name to give the branch containing your batched dependencies
+    required: false
+  batchPullTitle:
+    description: The title to give the PR containing your batched dependencies
+    required: false
+
+branding:
+  icon: 'box'
+  color: 'blue'
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
