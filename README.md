@@ -1,5 +1,7 @@
 # Dependabot Batcher
 
+[![semantic-release: conventional](https://img.shields.io/badge/semantic--release-conventional-blue?style=flat&logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
 An action to ease your dependency maintenance and save GitHub minutes.
 
 Dependabot is great - it alerts you to vulnerable and outdated dependencies and even creates PRs to update them.
@@ -24,12 +26,12 @@ If you haven't merged the batch PR when it next runs, it'll automatically append
 
 ### Configuration
 
-| input              | description                                                                                                                | required | default |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------|---|------------------------------|
-| `token`              | A token with 'repo' and 'workflow' privileges                                                                              | ✅ | N/A |
-| `baseBranchName`     | The name of your default branch, usually `main` or `master`                                                                |   | `'main'` |
-| `batchBranchName` | The name to give the branch containing your batched dependencies. [Cannot start](#important-information) with `dependabot` |   | `'batched-dependabot-updates'` |
-| `batchPullTitle`  | The title to give the PR containing your batched dependencies                                                              |   | `'Batched Dependabot updates'` |
+| input             | description                                                                                                              | required | default                        |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
+| `token`           | A token with `repo` and `workflow` privileges                                                                              | ✅        | N/A                            |
+| `baseBranchName`  | The name of your default branch, usually `main` or `master`                                                              |          | `'main'`                       |
+| `batchBranchName` | The name to give the branch containing your batched dependencies. [Cannot start](#important-information) with `dependabot` |          | `'batched-dependabot-updates'` |
+| `batchPullTitle`  | The title to give the PR containing your batched dependencies                                                            |          | `'Batched Dependabot updates'` |
 
 ### Implementation
 
