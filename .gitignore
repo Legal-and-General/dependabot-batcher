@@ -17,11 +17,8 @@ npm-debug.log
 *.sublime-workspace
 *.rej
 
-# IDE - VSCode
-.vscode/*
-
 # misc
-/.sass-cache
+/coverage
 /typings
 
 # System Files

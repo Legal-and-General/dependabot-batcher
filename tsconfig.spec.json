@@ -9,5 +9,5 @@
     "../../node_modules/@types/jest/index.d.ts",
     "../../node_modules/@types/jest/jasmine.d.ts"
   ],
-  "include": ["./src/**/*.spec.ts", "./src/**/*.d.ts"]
+  "include": ["./src/**/*.spec.ts", "./types/**/*.ts", "./src/**/*.d.ts"]
 }
