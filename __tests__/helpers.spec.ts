@@ -55,7 +55,7 @@ describe('getInputs', () => {
 
 describe('getMainBodyContent', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    jest.useFakeTimers({ doNotFake: ['performance'] });
     jest.setSystemTime(new Date('2022-08-02'));
   });
 
