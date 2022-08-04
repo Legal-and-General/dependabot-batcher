@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Legal-General-Group-Digital/dependabot-batcher-dev.git"
+    "url": "git+https://github.com/Legal-and-General/dependabot-batcher.git"
   },
   "bugs": {
     "url": "https://github.com/Legal-and-General/dependabot-batcher/issues"
