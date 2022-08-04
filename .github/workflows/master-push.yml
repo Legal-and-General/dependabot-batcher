@@ -13,19 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: 'Setup node'
+      - name: 'Setup Node'
         uses: actions/setup-node@v3.4.1
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
-      - name: 'Install dependencies'
+      - name: 'Install Dependencies'
         run: npm ci
 
-      - name: 'Build action'
+      - name: 'Build Action'
         run: npm run build
 
-      - name: 'Zip library'
+      - name: 'Zip Library'
         run: zip -r batcher.zip dist/
 
       - name: 'Release'
