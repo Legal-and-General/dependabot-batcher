@@ -1,0 +1,41 @@
+name: 'Pull Request'
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  verify:
+    if: ${{ !startsWith(github.head_ref, 'dependabot/')  }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: 'Install NPM Packages'
+        run: npm ci
+
+      - name: 'Run Commitlint'
+        run: npx commitlint --from HEAD~${{ github.event.pull_request.commits }} --to HEAD
+
+      - name: 'Run Lint'
+        run: npm run lint
+
+      - name: 'Run Unit Tests'
+        run: npm run test
+
+      - name: 'Create Build Artifact'
+        run: npm run build
+
+      - name: 'Upload Build Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+          if-no-files-found: error
