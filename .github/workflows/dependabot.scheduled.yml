@@ -1,0 +1,25 @@
+name: 'Dependabot Batcher: Scheduled'
+on:
+  schedule:
+    - cron:  '0 9 * * 1,3'
+
+jobs:
+  dependabot-batcher:
+    name: 'Combine Dependabot PRs'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repo'
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.DEPENDABOT_BATCH_TOKEN }}
+
+      - name: 'Set Node Version'
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Dependabot Batcher'
+        uses: Legal-and-General/dependabot-batcher@v1.0.0
+        with:
+          token: ${{ secrets.DEPENDABOT_BATCH_TOKEN }}
+          baseBranchName: 'main'
