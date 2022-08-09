@@ -22,6 +22,7 @@ jobs:
         run: npm ci
 
       - name: 'Run Commitlint'
+        if: ${{ !contains(github.head_ref, 'batched-dependabot-updates') }}
         run: npx commitlint --from HEAD~${{ github.event.pull_request.commits }} --to HEAD
 
       - name: 'Run Lint'
