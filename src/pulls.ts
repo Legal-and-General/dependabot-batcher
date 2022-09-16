@@ -46,8 +46,6 @@ export async function mergePulls(
         head: branch,
       });
     } catch (error) {
-      console.log('error', error);
-
       unmergedPulls.push({
         branch,
         number,
