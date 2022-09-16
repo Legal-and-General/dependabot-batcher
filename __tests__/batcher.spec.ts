@@ -1,8 +1,9 @@
 import { dependabotBatcher } from '../src/batcher';
-import { getInputs } from '../src/helpers';
-import { createBatchBranch } from '../src/batch-branch';
+import { getInputs, isBatchPrOpen } from '../src/helpers';
+import { handleBatchBranch } from '../src/batch-branch/handle';
 import { getPulls, handleMergedPull, mergePulls } from '../src/pulls';
-import { createBatchPr, updateBatchPr } from '../src/batch-pull';
+import { updateBatchPr } from '../src/batch-pr/update';
+import { createBatchPr } from '../src/batch-pr/create';
 
 jest.mock('../src/pulls', () => ({
   getPulls: jest.fn().mockReturnValue({
@@ -40,14 +41,18 @@ jest.mock('../src/helpers', () => ({
     batchBranchName: 'batched-dependabot-updates',
     batchPullTitle: 'Batched Dependabot updates',
   })),
+  isBatchPrOpen: jest.fn(),
 }));
 
-jest.mock('../src/batch-branch', () => ({
-  createBatchBranch: jest.fn(),
+jest.mock('../src/batch-branch/handle', () => ({
+  handleBatchBranch: jest.fn(),
 }));
 
-jest.mock('../src/batch-pull', () => ({
+jest.mock('../src/batch-pr/create', () => ({
   createBatchPr: jest.fn(),
+}));
+
+jest.mock('../src/batch-pr/update', () => ({
   updateBatchPr: jest.fn(),
 }));
 
@@ -79,10 +84,11 @@ describe('dependabotBatcher', () => {
 
     await dependabotBatcher();
 
-    expect(createBatchBranch).not.toBeCalled();
+    expect(handleBatchBranch).not.toBeCalled();
+    expect(isBatchPrOpen).not.toBeCalled();
   });
 
-  it('should create batch branch if there are dependabot pulls', async () => {
+  it('should handle batch branch if there are dependabot pulls', async () => {
     const openPulls = [ { head: { ref: 'foo' }, number: 0 }, { head: { ref: 'bar' }, number: 1 } ];
 
     (getPulls as jest.Mock).mockReturnValue({
@@ -93,11 +99,13 @@ describe('dependabotBatcher', () => {
       } ],
     });
 
+    (isBatchPrOpen as jest.Mock).mockReturnValue(true);
+
     await dependabotBatcher();
 
-    expect(createBatchBranch).toBeCalledWith(
+    expect(handleBatchBranch).toBeCalledWith(
       { octokit: { mocked: true }, owner: 'Legal-and-General', repo: 'SomeRepository' },
-      openPulls,
+      true,
       'batched-dependabot-updates',
       'someBaseBranch',
     );
@@ -134,7 +142,7 @@ describe('dependabotBatcher', () => {
       pullsToCombine,
     });
 
-    (createBatchBranch as jest.Mock).mockReturnValue(true);
+    (isBatchPrOpen as jest.Mock).mockReturnValue(true);
 
     await dependabotBatcher();
 
@@ -156,7 +164,7 @@ describe('dependabotBatcher', () => {
       pullsToCombine,
     });
 
-    (createBatchBranch as jest.Mock).mockReturnValue(false);
+    (isBatchPrOpen as jest.Mock).mockReturnValue(false);
 
     await dependabotBatcher();
 

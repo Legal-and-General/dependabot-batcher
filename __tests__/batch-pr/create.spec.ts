@@ -1,8 +1,7 @@
-import { createBatchPr, updateBatchPr } from '../src/batch-pull';
 import { Octokit } from '@octokit/rest';
-import { PullRequest } from '../types';
+import { createBatchPr } from '../../src/batch-pr/create';
 
-jest.mock('../src/helpers.ts', () => ({
+jest.mock('../../src/helpers.ts', () => ({
   getInputs: jest.fn().mockReturnValue({
     token: 'ABC',
     baseBranchName: 'someBaseBranch',
@@ -40,19 +39,4 @@ describe('createBatchPr', () => {
   });
 });
 
-describe('updateBatchPr', () => {
-  it('should update the PR', async() => {
-    await updateBatchPr(
-      { octokit: octokitMock as unknown as Octokit, owner: 'Legal-and-General', repo: 'A Repository' },
-      [ ],
-      [ { title: 'Batched Dependabot updates', number: 0, body: 'foo' }, { title: 'Some other PR', number: 1, body: 'bar' } ] as Array<PullRequest>,
-    );
 
-    expect(mockUpdatePull).toBeCalledWith({
-      owner: 'Legal-and-General',
-      repo: 'A Repository',
-      pull_number: 0,
-      body: 'foo\n\nDate\n\nMessage',
-    });
-  });
-});

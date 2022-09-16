@@ -1,10 +1,11 @@
 import { context } from '@actions/github';
 import { Octokit } from '@octokit/rest';
 
-import { getInputs } from './helpers';
+import { getInputs, isBatchPrOpen } from './helpers';
 import { UnmergedPullRequest } from '../types';
-import { createBatchBranch } from './batch-branch';
-import { createBatchPr, updateBatchPr } from './batch-pull';
+import { handleBatchBranch } from './batch-branch/handle';
+import { updateBatchPr } from './batch-pr/update';
+import { createBatchPr } from './batch-pr/create';
 import { getPulls, handleMergedPull, mergePulls } from './pulls';
 
 export async function dependabotBatcher() {
@@ -33,9 +34,11 @@ export async function dependabotBatcher() {
 
   console.info(`ℹ️ ${pullsToCombine.length} dependabot PR(s) found`);
 
-  const batchBranchAlreadyExists = await createBatchBranch(
+  const batchPrAlreadyExists = isBatchPrOpen(openPulls, batchBranchName);
+
+  await handleBatchBranch(
     { octokit, owner, repo },
-    openPulls,
+    batchPrAlreadyExists,
     batchBranchName,
     baseBranchName,
   );
@@ -52,7 +55,7 @@ export async function dependabotBatcher() {
   });
 
   if (pullsToCombine.length) {
-    if (batchBranchAlreadyExists) {
+    if (batchPrAlreadyExists) {
       // The batch PR already exists, so we need to update it
       await updateBatchPr({ octokit, owner, repo }, pullsToCombine, openPulls);
     } else {
