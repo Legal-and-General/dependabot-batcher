@@ -1,5 +1,7 @@
 import { getInput } from '@actions/core';
 import { getInputs, getMainBodyContent } from '../src/helpers';
+import { PullRequest } from '../types';
+import * as helpers from '../src/helpers';
 
 jest.mock('@actions/core', () => ({
   getInput: jest.fn(),
@@ -75,5 +77,30 @@ describe('getMainBodyContent', () => {
 
     expect(pullsListMessage).toBe('- #0\n- #1\n- #2\n');
     expect(dateInfo).toBe('**Tue Aug 02 2022**');
+  });
+});
+
+describe('isBatchPrOpen', () => {
+  it('should return true when an open pr matches the baseBranch ref', () => {
+    const openPulls = [
+      {head: {ref: 'foo'}, number: 0},
+      {head: {ref: 'bar'}, number: 1},
+    ] as Array<PullRequest>;
+
+    const result = helpers.isBatchPrOpen(openPulls, 'foo');
+
+    expect(result).toEqual(true);
+  });
+
+
+  it('should return false when no open pr matches the baseBranch ref', () => {
+    const openPulls = [
+      {head: {ref: 'foo'}, number: 0},
+      {head: {ref: 'bar'}, number: 1},
+    ] as Array<PullRequest>;
+
+    const result = helpers.isBatchPrOpen(openPulls, 'baz');
+
+    expect(result).toEqual(false);
   });
 });
