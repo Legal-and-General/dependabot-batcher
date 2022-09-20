@@ -17,7 +17,7 @@ export async function handleBatchBranch(
   // entries that begin with the branch name: https://octokit.github.io/rest.js/v18#git-list-matching-refs
 
   const batchBranchAlreadyExists =
-    allRefs.filter(ref => ref.ref === `refs/heads/${batchBranchName}`).length === 1;
+    allRefs.filter(({ ref }) => ref === `refs/heads/${batchBranchName}`).length === 1;
 
   if (!batchPrAlreadyExists) {
     console.info(`ℹ️ ${batchBranchName}: There is no open PR for the batch branch`);
