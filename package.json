@@ -29,7 +29,7 @@
     "@commitlint/config-conventional": "^17.4.2",
     "@octokit/openapi-types": "^22.0.1",
     "@semantic-release/github": "^10.0.3",
-    "@types/jest": "^28.1.6",
+    "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.6.0",
     "@vercel/ncc": "^0.38.1",
