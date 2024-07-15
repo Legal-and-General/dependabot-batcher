@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout Repo'
-        uses: actions/checkout@v4.1.3
+        uses: actions/checkout@v4.1.7
         with:
           token: ${{ secrets.DEPENDABOT_BATCH_TOKEN }}
 
       - name: 'Set Node Version'
-        uses: actions/setup-node@v4.0.2
+        uses: actions/setup-node@v4.0.3
         with:
           node-version-file: '.nvmrc'
 
