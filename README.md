@@ -1,5 +1,5 @@
 > [!NOTE]
-> We have now **deprecated** it in favour of the [new feature](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups) that allows you to group your updates directly in Dependabot.
+> We have now **deprecated** this action in favour of the [new feature](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups) that allows you to group your updates directly in Dependabot.
 > We believe that, while not identical, the functionality is similar enough to no longer need to maintain Dependabot Batcher.
 > 
 > We will keep the repository available for reference, but there will be no further maintenance or releases.
