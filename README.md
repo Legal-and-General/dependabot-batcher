@@ -1,8 +1,16 @@
+> [!NOTE]
+> Thank you to everyone who used this action. We have now **deprecated** it in favour of the [new feature](https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups) that allows you to group your updates directly in Dependabot.
+> We believe that, while not identical, the functionality is similar enough to no longer need to maintain Dependabot Batcher.
+> 
+> We will keep the repository available for reference, but there will be no further maintenance or releases.
+
+Thanks to everyone who used our action, we hope it helped you out 🙏
+
+----------
+
 # Dependabot Batcher
 
-[![semantic-release: conventional](https://img.shields.io/badge/semantic--release-conventional-blue?style=flat&logo=semantic-release)](https://github.com/semantic-release/semantic-release)
-
-An action to ease your dependency maintenance and save GitHub minutes.
+Dependabot Batcher was an action to ease your dependency maintenance and save GitHub minutes.
 
 Dependabot is great - it alerts you to vulnerable and outdated dependencies and even creates PRs to update them.
 However, it can often create multiple PRs a day, all of which consume valuable GitHub minutes in your CI pipeline.
